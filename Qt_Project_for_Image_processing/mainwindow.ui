@@ -59,6 +59,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QRadioButton" name="Sobel">
+         <property name="text">
+          <string>Sobel Filter</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>

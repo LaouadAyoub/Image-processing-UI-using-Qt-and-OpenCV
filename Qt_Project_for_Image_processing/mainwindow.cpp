@@ -36,9 +36,24 @@ void MainWindow::on_outputPushButton_pressed()
         int ksize = 1;
         int scale = 1;
         int delta = 0;
-        Mat grad;
+        Mat gauss;
         inpImg = imread(ui->inputLineEdit->text().toStdString());
-        if(ui->medianBlurRadioButton->isChecked())
+
+        if(ui->Sobel->isChecked())
+        {
+            cv::GaussianBlur(inpImg, gauss, Size(5, 5), 1.25);
+             // Convert the image to grayscale
+            cv::cvtColor(gauss, out_gray, COLOR_BGR2GRAY);
+            Mat grad_x, grad_y;
+            Mat abs_grad_x, abs_grad_y;
+            Sobel(out_gray, grad_x, ddepth, 1, 0, ksize, scale, delta, BORDER_DEFAULT);
+            Sobel(out_gray, grad_y, ddepth, 0, 1, ksize, scale, delta, BORDER_DEFAULT);
+            // converting back to CV_8U
+            convertScaleAbs(grad_x, abs_grad_x);
+            convertScaleAbs(grad_y, abs_grad_y);
+            addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, outImg);
+        }
+        else if(ui->medianBlurRadioButton->isChecked())
         {
             cv::medianBlur(inpImg, outImg, 5);
         }
