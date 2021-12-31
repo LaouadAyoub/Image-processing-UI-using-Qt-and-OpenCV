@@ -72,7 +72,12 @@ void MainWindow::on_outputPushButton_pressed()
 
         }
         imwrite(fileName.toStdString(), outImg);
-        ui->Image->setPixmap(QPixmap::fromImage(qimage.scaled(400,400)));
+        QPixmap piximage;
+        piximage.convertFromImage(qimage);
+        int w = ui->Image->width();
+        int h = ui->Image->height();
+
+        ui->Image->setPixmap(piximage.scaled(w,h,Qt::KeepAspectRatio));
         //imshow("Output Image", outImg);
     }
 }
