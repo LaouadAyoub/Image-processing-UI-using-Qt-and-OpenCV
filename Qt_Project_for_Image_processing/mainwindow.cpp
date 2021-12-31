@@ -31,12 +31,14 @@ void MainWindow::on_outputPushButton_pressed()
     {
         ui->outputLineEdit->setText(fileName);
         using namespace cv;
+        using namespace std;
         Mat inpImg, outImg, out_gray;
         int ddepth = CV_16S;
         int ksize = 1;
         int scale = 1;
         int delta = 0;
         Mat gauss;
+        QImage qimage;
         inpImg = imread(ui->inputLineEdit->text().toStdString());
 
         if(ui->Sobel->isChecked())
@@ -52,16 +54,26 @@ void MainWindow::on_outputPushButton_pressed()
             convertScaleAbs(grad_x, abs_grad_x);
             convertScaleAbs(grad_y, abs_grad_y);
             addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, outImg);
+            qimage = QImage(outImg.data, outImg.cols, outImg.rows, QImage::Format_Grayscale8);
+            cout<<"hey ayoub"<<outImg.data;
+
         }
         else if(ui->medianBlurRadioButton->isChecked())
         {
             cv::medianBlur(inpImg, outImg, 5);
+            qimage = QImage(outImg.data, outImg.cols, outImg.rows, QImage::Format_RGB888).rgbSwapped();
+
         }
 
         else if(ui->gaussianBlurRadioButton->isChecked())
+        {
             cv::GaussianBlur(inpImg, outImg, Size(5, 5), 1.25);
+            qimage = QImage(outImg.data, outImg.cols, outImg.rows, QImage::Format_RGB888).rgbSwapped();
+
+        }
         imwrite(fileName.toStdString(), outImg);
-        imshow("Output Image", outImg);
+        ui->Image->setPixmap(QPixmap::fromImage(qimage.scaled(400,400)));
+        //imshow("Output Image", outImg);
     }
 }
 
