@@ -1,6 +1,8 @@
 # Image-processing-using-Qt-and-OpenCV
 This is an application that i designed and developped using Qt and OpenCV, 
+
  At the beginning I had the idea to implement the following specifications : 
+ 
     - The application must be able to take an image as an input (*.jpg,*.png,*.bmp) 
     - The application must be able to apply a blur filter. 
     - The user must be able to choose the Median Blur or the Gaussian Blur type to filter the input image.
