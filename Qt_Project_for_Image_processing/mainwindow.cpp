@@ -20,6 +20,10 @@ void MainWindow::on_inputPushButton_pressed()
     if(QFile::exists(fileName))
     {
         ui->inputLineEdit->setText(fileName);
+        QPixmap pixInput(fileName);
+        int w = ui->InputImage->width();
+        int h = ui->InputImage->height();
+        ui->InputImage->setPixmap(pixInput.scaled(w,h,Qt::KeepAspectRatio));
     }
 }
 
@@ -76,7 +80,6 @@ void MainWindow::on_outputPushButton_pressed()
         piximage.convertFromImage(qimage);
         int w = ui->Image->width();
         int h = ui->Image->height();
-
         ui->Image->setPixmap(piximage.scaled(w,h,Qt::KeepAspectRatio));
         //imshow("Output Image", outImg);
     }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>593</width>
-    <height>484</height>
+    <height>584</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,21 +78,25 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="Image">
-        <property name="minimumSize">
-         <size>
-          <width>400</width>
-          <height>400</height>
-         </size>
+       <widget class="QLabel" name="InputImage">
+        <property name="text">
+         <string/>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>700</width>
-          <height>400</height>
-         </size>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="Image">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
         </property>
         <property name="frameShape">
          <enum>QFrame::WinPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
         <property name="text">
          <string/>
